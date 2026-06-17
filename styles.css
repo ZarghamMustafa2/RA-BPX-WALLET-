@@ -64,6 +64,13 @@ body {
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
   transition: background-color 0.3s ease, color 0.3s ease;
+  padding-top: 2.5rem; /* Space for fixed announcement banner */
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 3rem;
+  }
 }
 
 body::selection {
@@ -145,6 +152,74 @@ a {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: background 0.3s ease;
+}
+
+/* Announcement Ticker Banner */
+.announcement-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5rem;
+  background: linear-gradient(90deg, var(--teal-700), var(--teal-900));
+  color: white;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .announcement-banner {
+    height: 3rem;
+    font-size: 0.95rem;
+  }
+}
+
+.announcement-ticker {
+  white-space: nowrap;
+  padding-left: 100%;
+  display: inline-block;
+  animation: ticker 25s linear infinite;
+}
+
+[dir="rtl"] .announcement-ticker {
+  padding-left: 0;
+  padding-right: 100%;
+  animation: ticker-rtl 25s linear infinite;
+}
+
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+@keyframes ticker-rtl {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(100%, 0, 0); }
+}
+
+/* Adjust header top position since banner is fixed */
+.header {
+  position: fixed;
+  width: 100%;
+  top: 2.5rem; /* Put below the banner */
+  z-index: 50;
+  transition: all 0.3s;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .header {
+    top: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
 }
 
 /* Controls (Theme & Lang Switcher) */
@@ -233,23 +308,6 @@ a {
 .animate-bounce { animation: bounce 1s infinite; }
 
 /* Navigation */
-.header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 50;
-  transition: all 0.3s;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-@media (min-width: 768px) {
-  .header {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-}
-
 .nav-bar {
   border: 1px solid var(--border-glass);
   border-radius: 1.25rem;
