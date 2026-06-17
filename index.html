@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RA.BOOKBPX - The world's most advanced sports trading and betting platform. Premium, secure, and lightning fast.">
+  <title>RA.BOOKBPX | Elite Sports Trading</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Scripts -->
+  <script>
+    const APP_CONFIG = {
+      name: "RA.BOOKBPX",
+      apkUrl: "RA.BOOKBPX.apk"
+    };
+
+    const TRANSLATIONS = {
+      en: {
+        "nav-home": "Home",
+        "nav-features": "Features",
+        "btn-download-apk": "Download APK",
+        "badge-live": "Version 3.1 is Live",
+        "badge-bonus": "🎁 10% Extra Bonus On Every Deposit!",
+        "hero-title": "THE NEXT <br /> <span class='text-indigo'>GENERATION</span>",
+        "hero-subtitle": "Elite sports trading meets state-of-the-art security. Experience the world's most advanced platform.",
+        "btn-download-app": "Download App",
+        "section-subtitle": "Excellence Guaranteed",
+        "section-title": "ELITE FEATURES",
+        "feat-1-title": "Ultra Secure",
+        "feat-1-desc": "Military-grade encryption protecting every single transaction and user detail.",
+        "feat-2-title": "Instant Flow",
+        "feat-2-desc": "Lightning-fast deposits and withdrawals. No waiting, just trading.",
+        "feat-3-title": "24/7 Support",
+        "feat-3-desc": "Dedicated elite support agents available around the clock for your assistance.",
+        "download-title": "GET THE APP NOW",
+        "download-desc": "Join thousands of professional traders on the most trusted platform in the world.",
+        "btn-download-android": "Download for Android",
+        "footer-copyright": "© 2026 RA.BOOKBPX. THE ELITE TRADING EXPERIENCE.",
+        "support-title": "Customer Support",
+        "support-subtitle": "Active 24/7",
+        "support-tg-desc": "Join Telegram Channel",
+        "support-wa-desc": "Direct WhatsApp Chat"
+      },
+      ur: {
+        "nav-home": "ہوم",
+        "nav-features": "خصوصیات",
+        "btn-download-apk": "ڈاؤن لوڈ APK",
+        "badge-live": "ورژن 3.1 لائیو ہے",
+        "badge-bonus": "🎁 ہر ڈپازٹ پر 10% اضافی بونس!",
+        "hero-title": "اگلی نسل کا <br /> <span class='text-indigo'>ٹریڈنگ پلیٹ فارم</span>",
+        "hero-subtitle": "اعلیٰ ترین کھیلوں کی ٹریڈنگ اور جدید ترین سیکیورٹی کا ملاپ۔ دنیا کے جدید ترین پلیٹ فارم کا تجربہ کریں۔",
+        "btn-download-app": "ایپ ڈاؤن لوڈ کریں",
+        "section-subtitle": "بہترین کارکردگی کی ضمانت",
+        "section-title": "نمایاں خصوصیات",
+        "feat-1-title": "انتہائی محفوظ",
+        "feat-1-desc": "ہر ٹرانزیکشن اور صارف کی تفصیلات کی حفاظت کے لیے ملٹری گریڈ انکرپشن۔",
+        "feat-2-title": "فوری لین دین",
+        "feat-2-desc": "بجلی کی طرح تیز ڈپازٹ اور نکلوانا۔ کوئی انتظار نہیں، صرف ٹریڈنگ۔",
+        "feat-3-title": "24/7 سپورٹ",
+        "feat-3-desc": "آپ کی مدد کے لیے چوبیس گھنٹے دستیاب سرشار سپورٹ ایجنٹس۔",
+        "download-title": "ابھی ایپ حاصل کریں",
+        "download-desc": "دنیا کے سب سے قابل اعتماد پلیٹ فارم پر ہزاروں پیشہ ور تاجروں کے ساتھ شامل ہوں۔",
+        "btn-download-android": "اینڈرائیڈ کے لیے ڈاؤن لوڈ کریں",
+        "footer-copyright": "© 2026 RA.BOOKBPX۔ بہترین ٹریڈنگ کا تجربہ۔",
+        "support-title": "کسٹمر سپورٹ",
+        "support-subtitle": "24/7 فعال",
+        "support-tg-desc": "ٹیلی گرام چینل جوائن کریں",
+        "support-wa-desc": "براہ راست واٹس ایپ چیٹ"
+      }
+    };
+
+    function updateDownloadLinks() {
+      const downloadButtons = document.querySelectorAll('.apk-download-btn');
+      downloadButtons.forEach(btn => {
+        btn.href = APP_CONFIG.apkUrl;
+        if (APP_CONFIG.apkUrl) {
+          btn.setAttribute('download', 'RA.BOOKBPX.apk');
+        }
+      });
+    }
+
+    function setLanguage(lang) {
+      localStorage.setItem('ra_lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      
+      if (lang === 'ur') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.getElementById('lang-toggle').innerText = 'EN';
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.getElementById('lang-toggle').innerText = 'اردو';
+      }
+      
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(elem => {
+        const key = elem.getAttribute('data-i18n');
+        if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+          elem.innerHTML = TRANSLATIONS[lang][key];
+        }
+      });
+    }
+
+    function toggleLanguage() {
+      const currentLang = localStorage.getItem('ra_lang') || 'en';
+      const nextLang = currentLang === 'en' ? 'ur' : 'en';
+      setLanguage(nextLang);
+    }
+
+    function setTheme(theme) {
+      localStorage.setItem('ra_theme', theme);
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = localStorage.getItem('ra_theme') || 'light';
+      const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+      setTheme(nextTheme);
+    }
+
+    function toggleSupportMenu(e) {
+      e.stopPropagation();
+      const menu = document.getElementById('support-menu');
+      menu.classList.toggle('active');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize states
+      const savedLang = localStorage.getItem('ra_lang') || 'en';
+      setLanguage(savedLang);
+      
+      const savedTheme = localStorage.getItem('ra_theme') || 'light';
+      setTheme(savedTheme);
+
+      updateDownloadLinks();
+
+      // Setup listeners
+      document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+      document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+      document.getElementById('support-trigger').addEventListener('click', toggleSupportMenu);
+
+      // Close support menu when clicking outside
+      document.addEventListener('click', () => {
+        const menu = document.getElementById('support-menu');
+        if (menu && menu.classList.contains('active')) {
+          menu.classList.remove('active');
+        }
+      });
+      document.getElementById('support-menu').addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
+  </script>
+
+  <!-- NAVIGATION -->
+  <header class="header">
+    <div class="container">
+      <div class="nav-bar glass">
+        <div class="logo-group">
+          <img src="ra_logo.png" alt="Logo" class="nav-logo">
+          <span class="nav-title">RA.<span class="text-indigo nav-title-text-bpx">BOOKBPX</span></span>
+        </div>
+        
+        <div class="nav-right">
+          <nav class="nav-links">
+            <a href="#home" data-i18n="nav-home">Home</a>
+            <a href="#features" data-i18n="nav-features">Features</a>
+          </nav>
+          
+          <div class="controls-group">
+            <button id="theme-toggle" class="control-btn" aria-label="Toggle Theme">
+              <!-- Sun Icon (shown in dark theme) -->
+              <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+              </svg>
+              <!-- Moon Icon (shown in light theme) -->
+              <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </button>
+            <button id="lang-toggle" class="control-btn" aria-label="Toggle Language">
+              اردو
+            </button>
+          </div>
+          
+          <a href="#download" class="apk-download-btn btn-indigo btn-small" data-i18n="btn-download-apk">Download APK</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="hero">
+    <div class="hero-bg-blur top-left"></div>
+    <div class="hero-bg-blur bottom-right"></div>
+
+    <div class="container text-center hero-content">
+      <div class="badge animate-bounce" style="margin-bottom: 0.75rem;">
+        <span class="badge-dot"></span>
+        <span data-i18n="badge-live">Version 3.1 is Live</span>
+      </div>
+      <div class="bonus-badge" data-i18n="badge-bonus" style="display: inline-block; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #6366f1, #4f46e5); border: 2px solid #818cf8; box-shadow: 0 0 20px rgba(79, 70, 229, 0.6); border-radius: 30px; color: #ffffff; font-weight: 800; font-size: 1.25rem; letter-spacing: 0.5px; margin-bottom: 2rem; text-transform: uppercase; animation: pulse 1.5s infinite;">
+        🎁 10% Extra Bonus On Every Deposit!
+      </div>
+
+      <h1 class="hero-title" data-i18n="hero-title">
+        THE NEXT <br />
+        <span class="text-indigo">GENERATION</span>
+      </h1>
+
+      <p class="hero-subtitle" data-i18n="hero-subtitle">
+        Elite sports trading meets state-of-the-art security. Experience the world's most advanced platform.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#download" class="apk-download-btn btn-indigo btn-large" data-i18n="btn-download-app">
+          Download App
+        </a>
+      </div>
+
+      <!-- App Mockup Preview -->
+      <div class="app-mockup">
+        <div class="mesh-gradient mockup-glow animate-pulse-slow"></div>
+        <div class="premium-card mockup-card">
+          <div class="mockup-screen mesh-gradient">
+            <img src="ra_logo.png" class="mockup-logo animate-pulse" alt="App Logo">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="text-center section-header">
+        <h3 class="section-subtitle" data-i18n="section-subtitle">Excellence Guaranteed</h3>
+        <h2 class="section-title" data-i18n="section-title">ELITE FEATURES</h2>
+      </div>
+
+      <div class="features-grid">
+        <div class="premium-card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h4 class="feature-title" data-i18n="feat-1-title">Ultra Secure</h4>
+          <p class="feature-desc" data-i18n="feat-1-desc">Military-grade encryption protecting every single transaction and user detail.</p>
+        </div>
+
+        <div class="premium-card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h4 class="feature-title" data-i18n="feat-2-title">Instant Flow</h4>
+          <p class="feature-desc" data-i18n="feat-2-desc">Lightning-fast deposits and withdrawals. No waiting, just trading.</p>
+        </div>
+
+        <div class="premium-card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h4 class="feature-title" data-i18n="feat-3-title">24/7 Support</h4>
+          <p class="feature-desc" data-i18n="feat-3-desc">Dedicated elite support agents available around the clock for your assistance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD SECTION -->
+  <section id="download" class="download-section">
+    <div class="download-container">
+      <div class="mesh-gradient download-wrapper">
+        <div class="download-content">
+          <div class="download-glow"></div>
+          <div class="relative z-10">
+            <h2 class="download-title" data-i18n="download-title">GET THE APP NOW</h2>
+            <p class="download-desc" data-i18n="download-desc">
+              Join thousands of professional traders on the most trusted platform in the world.
+            </p>
+            <a href="#" class="apk-download-btn btn-indigo btn-massive" data-i18n="btn-download-android">
+              Download for Android
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-logo">
+        <img src="ra_logo.png" alt="Logo" class="footer-icon">
+        <span class="footer-title">RA.<span class="text-indigo-muted">BOOKBPX</span></span>
+      </div>
+      <div class="footer-copyright" data-i18n="footer-copyright">
+        © 2026 RA.BOOKBPX. THE ELITE TRADING EXPERIENCE.
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING SUPPORT WIDGET -->
+  <div class="support-widget" id="support-widget">
+    <button class="support-trigger" id="support-trigger" aria-label="Customer Support">
+      <span class="support-badge-dot animate-pulse"></span>
+      <svg class="chat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    </button>
+    
+    <div class="support-menu glass" id="support-menu">
+      <div class="support-header">
+        <h4 data-i18n="support-title">Customer Support</h4>
+        <p data-i18n="support-subtitle">Active 24/7</p>
+      </div>
+      <div class="support-options">
+        <a href="https://t.me/your_telegram_username" target="_blank" class="support-item telegram">
+          <svg class="support-item-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.98 1.25-5.59 3.69-.53.36-1 .54-1.4.53-.44-.01-1.28-.25-1.91-.45-.77-.25-1.38-.38-1.33-.8.03-.22.33-.45.92-.69 3.59-1.56 5.99-2.59 7.21-3.1 3.44-1.43 4.16-1.68 4.63-1.69.1 0 .33.02.48.15.12.1.16.24.18.34.02.1.04.3.02.51z"/>
+          </svg>
+          <div>
+            <span class="support-item-name">Telegram</span>
+            <span class="support-item-desc" data-i18n="support-tg-desc">Join our channel</span>
+          </div>
+        </a>
+        <a href="https://wa.me/your_whatsapp_number" target="_blank" class="support-item whatsapp">
+          <svg class="support-item-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.993L2 22l5.233-1.371a9.947 9.947 0 004.777 1.217h.005c5.505 0 9.989-4.478 9.99-9.984a9.983 9.983 0 00-10-9.862zm0 1.636c4.61 0 8.36 3.746 8.361 8.35a8.348 8.348 0 01-8.361 8.35 8.318 8.318 0 01-4.276-1.185l-.307-.183-3.178.833.848-3.097-.201-.32a8.317 8.317 0 01-1.248-4.4c.002-4.602 3.753-8.348 8.362-8.348zm-3.604 4.757c-.198 0-.422.074-.606.273-.184.2-.703.687-.703 1.677s.719 1.944.821 2.083c.102.139 1.414 2.159 3.425 3.028.479.207.852.33 1.143.423.482.153.921.131 1.267.08.387-.058 1.187-.486 1.355-.953.169-.468.169-.87.119-.953-.05-.084-.184-.134-.387-.234s-1.187-.585-1.37-.652-.319-.1-.453.1c-.134.2-.52.652-.638.786-.118.134-.235.15-.438.05a5.524 5.524 0 01-1.625-1.002 6.096 6.096 0 01-1.125-1.397c-.118-.2.012-.298.125-.398.09-.08.2-.234.3-.35.102-.117.134-.2.202-.334.068-.134.034-.25-.017-.35-.05-.1-.453-1.093-.622-1.5-.164-.394-.329-.34-.453-.346-.117-.006-.252-.007-.386-.007z"/>
+          </svg>
+          <div>
+            <span class="support-item-name">WhatsApp</span>
+            <span class="support-item-desc" data-i18n="support-wa-desc">Direct live chat</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
