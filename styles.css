@@ -1037,3 +1037,49 @@ a {
 [dir="rtl"] .nav-links {
   gap: 2rem;
 }
+
+/* Hero Promo Text Styles */
+.hero-promo-container {
+  margin-bottom: 2rem;
+}
+
+.hero-promo-text {
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--teal-600);
+  background: rgba(20, 184, 166, 0.06);
+  border: 1px dashed rgba(20, 184, 166, 0.25);
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.75rem;
+  display: inline-block;
+  max-width: 90%;
+  box-shadow: 0 4px 15px -5px rgba(13, 148, 136, 0.1);
+  line-height: 1.4;
+  margin: 0 auto;
+}
+
+[data-theme="dark"] .hero-promo-text {
+  color: var(--teal-500);
+  background: rgba(45, 212, 191, 0.06);
+  border-color: rgba(45, 212, 191, 0.25);
+  box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+[dir="rtl"] .hero-promo-text {
+  font-family: 'Noto Naskh Arabic', sans-serif;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .hero-promo-container {
+    margin-bottom: 2.5rem;
+  }
+  
+  .hero-promo-text {
+    font-size: 1.35rem;
+    padding: 0.85rem 2rem;
+    border-radius: 1rem;
+  }
+}
